@@ -39,7 +39,7 @@
 			<select id="town" name="select-native-1" id="select-native-1" style="width:100%" onChange="list_page();">
         		<option value="0">Choose a Borough</option>
 						<option id="loading_selection" value="0">Loading Locations...</option>
-						<option v-for="item in items" v-bind:value="Locations['Name']['Latitude, Longitude, Zoom']">{{ item['Locations']['Name'] }}</option>
+						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']">{{ item['fields']['Name'] }}</option>
     		</select>
 		</div>
 <!--
@@ -103,7 +103,7 @@
 		</div>
 	</div>
 		<div data-role="content" class="content">
-				<h1 id="Locations"></h1>
+				<h1 id="town_name"></h1>
 				<ul id="org_list" data-role="listview" data-inset="true">
 				</ul>
 		</div>
@@ -160,7 +160,7 @@
 		} else if (mode == 1) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/Categories/?sort[0][field]=Name&sort[0][direction]=asc";
 		} else if (mode == 2) {
-			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND(("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
+			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND("+ages+"OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
 		} else if (mode == 3) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=(RECORD_ID()=\""+id+"\")";
 		}
