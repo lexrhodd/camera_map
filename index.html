@@ -40,7 +40,7 @@
 			<select id="town" name="select-native-1" id="select-native-1" style="width:100%" onChange="list_page();">
         		<option value="0">Choose a Borough</option>
 						<option id="loading_selection" value="0">Loading Locations...</option>
-						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']">{{ item['fields']['Name'] }}</option>
+						<option v-for="item in items" v-bind:value="item[item['fields']['Name'] ">{{ item['fields']['Name'] }}</option>
     		</select>
 		</div>
 <!--
@@ -142,7 +142,7 @@
 <script type="text/javascript">
 	var app_id = "app ";
 	var app_key = "keyv7ZopWtGY1rwVv";
-	var cat_names = [["NYCHA","NYCHA"],["KIOSK","KIOSK"]];
+	var cat_names = [["NYCHA","NYCHA"],["KIOSK","Kiosk"]];
 	var categories = "";
 	var ages = "";
 	var work = 0;
