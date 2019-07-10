@@ -4,19 +4,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<meta name="apple-mobile-web-app-capable" content="no" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta property="og:image" content="images/icon_300.png"/>    
+    <title>WEBSITE TITLE</title>
+
+	<meta property="og:image" content="images/icon_300.png"/>
 	<link rel="apple-touch-icon" href="images/icon_300.png"/>
-	<!-- 	<link rel="preload" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" as="style">
-	<link rel="preload" href="https://code.jquery.com/jquery-1.11.1.min.js" as="script"> -->
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> 
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js" defer ></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script>
     	$(document).on("mobileinit", function () {
         	$.mobile.hashListeningEnabled = false;
         	$.mobile.pushStateEnabled = false;
     	});
 	</script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<style>
 		.content {
 			text-align:left;
@@ -24,28 +25,29 @@
 			margin:0 auto 0 auto;
 			padding:0 15px 25px 15px
 		}
-	</style>	
-	<title>Camera Database</title>
+	</style>
 </head>
 <body>
 
 <div data-role="page" id="filter">
 	<div data-role="header" data-position="fixed">
-		<h1>Camera Database</h1>
-		<a href="#about" class="ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all ui-btn-right" data-transition="slide"></a> 
-		
+		<h1>TITLE</h1>
+		<a href="#about" class="ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all ui-btn-right" data-transition="slide"></a>
 	</div>
 	<div data-role="content" class="content">
-		<div class="ui-field-contain"> Select Borough
+		<div class="ui-field-contain"> DESCRIPTION
 			<select id="town" name="select-native-1" id="select-native-1" style="width:100%" onChange="list_page();">
-        		<option value="0">Choose a Borough</option>
+        		<option value="0">Choose a Location</option>
 						<option id="loading_selection" value="0">Loading Locations...</option>
-						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']"> {{ item['fields']['Name'] }}</option>
+						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']">{{ item['fields']['Name'] }}</option>
     		</select>
 		</div>
 
+		<p> AGE </p>
+		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();">
+
 		<fieldset id="categories" data-role="controlgroup">
-			<p style="margin-top:15px;">Check the type(s) of camera(s) you are looking for:</p>
+			<p style="margin-top:15px;">Check the type(s) of service(s) you are looking for:</p>
 		</fieldset>
 
 		<fieldset data-role="controlgroup" data-type="horizontal">
@@ -69,8 +71,6 @@
 	</div>
 	<div data-role="content" class="content">
 		<p> ABOUT PAGE CONTENT
-
-		<p> Testing
 	</div>
 </div>
 
@@ -128,18 +128,17 @@
 		</div>
 </div>
 
-
-
 <!-- Include Dependency Scripts -->
 <!--<script type="text/javascript" src="https://unpkg.com/vue"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3-tyZ0UkYztbB4D4WjmoU57gSd2ykGco"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key= "></script>
 
 <script type="text/javascript">
 	var app_id = "app ";
-	var app_key = "keyv7ZopWtGY1rwVv";
-	var cat_names = [["NYCHA","NYCHA"],["KIOSK","KIOSK"]];
+	var app_key = "key ";
+	var cat_names = [["Outreach","Community Outreach"],["Counseling","Counseling"],["Training","Job Opportunities/Training"],["Health","Health Services"],["Risk","High Risk"],["Multi","Multi-Service"]];
 	var categories = "";
 	var ages = "";
 	var work = 0;
@@ -194,8 +193,14 @@
 	}
 	function results_page() {
 		if ($('#town').find(":selected").val() == 0) {
-			alert('You must choose a Borough.');
-		} 
+			alert('You must choose a location.');
+		} else if ( isNaN(Number($('#age').val())) ) {
+			alert('You must enter a numeric age (in years) or leave blank.')
+		} else if ($('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked")) {
+			next_page_1()
+    } else {
+			alert('You must choose at least one type of service.')
+		}
 	}
 	function next_page_1() {
 		if (work == 0) {
@@ -214,7 +219,8 @@
     	}, 100);
 		}
 	}
-			if ($('#town').find(":selected").val() != 0 && !isNaN(Number($('#age').val())) ) {
+	function list_page() {
+		if ($('#town').find(":selected").val() != 0 && !isNaN(Number($('#age').val())) ) {
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
@@ -329,6 +335,7 @@
 		  $.mobile.changePage.defaults.transition = 'slide'; // reset default here
 		})
 </script>
+
 
 
 </body>
