@@ -179,7 +179,7 @@
 					axios.get(
 													 apicall,
                           {
-                              headers: { Authorization: Bearer  + app_key }
+                              headers: { Authorization: "Bearer " + app_key }
                           }
                       ).then(function(response){
                           self.items = response.data.records;
