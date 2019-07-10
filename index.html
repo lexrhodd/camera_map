@@ -244,7 +244,7 @@
 					$('#Locations').html($('#town').find(":selected").text());
 			    load_api_data('#results',2);
 					geo_data = $('#town').find(":selected").val().split(',').map(Number);
-					console.log(geo_data)
+					// console.log(geo_data)
 					lat = geo_data[0];
 					lon = geo_data[1];
 					zoomin = geo_data[2];
