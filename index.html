@@ -44,8 +44,7 @@
 	    		</select>
 			</div>
 
-<!-- 			<p> AGE </p>
-			 <input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();"> -->
+
 
 			<fieldset id="categories" data-role="controlgroup">
 				<p style="margin-top:15px;">Check the type(s) of camera(s) you are looking for:</p>
@@ -133,8 +132,7 @@
 
 
 
-	<!-- Include Dependency Scripts -->
-	<!--<script type="text/javascript" src="https://unpkg.com/vue"></script>-->
+
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3-tyZ0UkYztbB4D4WjmoU57gSd2ykGco"></script>
@@ -232,11 +230,7 @@
 						categories = categories+"FIND(\""+cat[1]+"\",{Category})";
 					}
 				});
-				//if ($('#age').val()=="") {
-				//	ages = "";
-				//} else {
-				//	ages = Number($('#age').val())+"<={Maximum Age},"+Number($('#age').val())+">={Minimum Age},";
-				//}
+
 				$('#Locations').html($('#town').find(":selected").text());
 		    load_api_data('#results',2);
 				geo_data = $('#town').find(":selected").val().split(',').map(Number);
@@ -281,10 +275,7 @@
 					}, 100);
 				}
 			}
-			//list_page();
-			/*
-			https://developers.google.com/maps/documentation/javascript/adding-a-google-map
-				*/
+
 			var markers = [];
 			function initMap(lat,lon,zoomin) {
 				var uluru = {lat: lat, lng: lon};
