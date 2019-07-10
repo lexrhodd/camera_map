@@ -140,7 +140,7 @@
 	var app_id = "appnkricUWdfHJvbp";
 	var app_key = "keyv7ZopWtGY1rwVv";
 	var cat_names = [["NYCHA","NYCHA"]];
-	var categories = "NYCHA";
+	var categories = "";
 	var ages = "";
 	var work = 0;
 	function load_first() {
@@ -179,7 +179,7 @@
 					axios.get(
 													 apicall,
                           {
-                              headers: { Authorization: "Bearer " + app_key }
+                              headers: { "Authorization: Bearer "+ app_key }
                           }
                       ).then(function(response){
                           self.items = response.data.records;
@@ -195,14 +195,12 @@
 	function results_page() {
 		if ($('#town').find(":selected").val() == 0) {
 			alert('You must choose a location.');
-		} 
-		// else if ( isNaN(Number($('#age').val())) ) {
-		// 	alert('You must enter a numeric age (in years) or leave blank.')
-		// } else if ($('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked") || $('#checkbox-v- ').is(":checked")) {
-		// 	next_page_1()
-  //   } else {
-		// 	alert('You must choose at least one type of service.')
-		// }
+		} else if ($('#checkbox-v-NYCHA').is(":checked") ) {
+			next_page_1()
+    } else {
+			alert('You must choose at least one type of service.')
+		}
+
 	}
 	function next_page_1() {
 		if (work == 0) {
