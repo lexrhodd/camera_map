@@ -28,6 +28,7 @@
 	<title>Camera Database</title>
 </head>
 <body>
+
 <div data-role="page" id="filter">
 	<div data-role="header" data-position="fixed">
 		<h1>Camera Database</h1>
@@ -42,9 +43,6 @@
 						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']"> {{ item['fields']['Name'] }}</option>
     		</select>
 		</div>
-<!--
-		<p> AGE </p>
-		 <input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();"> -->
 
 		<fieldset id="categories" data-role="controlgroup">
 			<p style="margin-top:15px;">Check the type(s) of camera(s) you are looking for:</p>
@@ -217,7 +215,7 @@
 		}
 	}
 	function list_page() {
-		if ($('#town').find(":selected").val() != 0 ) {
+		if ($('#town').find(":selected").val() != 0) {
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
