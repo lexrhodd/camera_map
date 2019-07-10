@@ -217,7 +217,7 @@
 		}
 	}
 	function list_page() {
-		if ($('#town').find(":selected").val() != 0  {
+		if ($('#town').find(":selected").val() != 0 ) {
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
