@@ -228,7 +228,7 @@
 				cat_names.forEach((cat, index) => {
 					if ($('#checkbox-v-'+cat[0]).is(":checked")){
 						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
-						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Managed by: {{ item['fields']['manager'] }}; Number of Cameras: {{ item['fields']['#cameras'] }}</p></a></li>")
+						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Ages: {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }}; Gender(s): {{ item['fields']['Gender'] }}</p></a></li>")
 						if (categories != "") {
 							categories = categories+",";
 						}
@@ -257,7 +257,7 @@
       	$("#detail").html("");
       	$("#detail").html($("#detail").html() + "<h3>{{ item['fields']['Name'] }}</h3>")
       	$("#detail").html($("#detail").html() + "<h4>{{ item['fields']['Category'] }}</h4>");
-      	$("#detail").html($("#detail").html() + "<p><b>Managed by:</b> {{ item['fields']['manager'] }} &nbsp;&nbsp; <b>Number of Cameras:</b> {{ item['fields']['#cameras'] }}</p>");
+      	$("#detail").html($("#detail").html() + "<p><b>Ages:</b> {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }} &nbsp;&nbsp; <b>Gender(s):</b> {{ item['fields']['Gender'] }}</p>");
 		$("#detail").html($("#detail").html() + "<p><b>Phone:</b> <a v-bind:href=\"'tel:'+item['fields']['Phone']\" target=\"_blank\">{{ item['fields']['Phone'] }}</p>");
 		$("#detail").html($("#detail").html() + "<p><b>Email:</b> <a v-bind:href=\"'mailto:'+item['fields']['Email']\" target=\"_blank\">{{ item['fields']['Email'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Website:</b> <a v-bind:href=\"item['fields']['Website']\" target=\"_blank\">{{ item['fields']['Website'] }}</a></p>");
