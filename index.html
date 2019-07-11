@@ -44,8 +44,8 @@
     		</select>
 		</div>
 
-		<p> AGE </p>
-<!-- 		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();"> -->
+<!-- 		<p> AGE </p>
+		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();"> -->
 
 		<fieldset id="categories" data-role="controlgroup">
 			<p style="margin-top:15px;">Check the type(s) of service(s) you are looking for:</p>
@@ -141,7 +141,7 @@
 	var app_key = "keyv7ZopWtGY1rwVv";
 	var cat_names = [["NYCHA","NYCHA"]];
 	var categories = "";
-	// var ages = "";
+	var ages = "";
 	var work = 0;
 	function load_first() {
 			cat_names.forEach((cat, index) => {
@@ -229,16 +229,16 @@
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
-				// cat_names.forEach((cat, index) => {
-				// 	if ($('#checkbox-v-'+cat[0]).is(":checked")){
-				// 		$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
-				// 		$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Ages: {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }}; Gender(s): {{ item['fields']['Gender'] }}</p></a></li>")
-				// 		if (categories != "") {
-				// 			categories = categories+",";
-				// 		}
-				// 		categories = categories+"FIND(\""+cat[1]+"\",{Category})";
-				// 	}
-				// });
+				cat_names.forEach((cat, index) => {
+					if ($('#checkbox-v-'+cat[0]).is(":checked")){
+						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
+						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Ages: {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }}; Gender(s): {{ item['fields']['Gender'] }}</p></a></li>")
+						if (categories != "") {
+							categories = categories+",";
+						}
+						categories = categories+"FIND(\""+cat[1]+"\",{Category})";
+					}
+				});
 				cat_names.forEach((cat, index) => {
 					if ($('#checkbox-v-'+cat[0]).is(":checked")){
 						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
