@@ -45,7 +45,7 @@
 		</div>
 
 		<p> AGE </p>
-		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();">
+<!-- 		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();"> -->
 
 		<fieldset id="categories" data-role="controlgroup">
 			<p style="margin-top:15px;">Check the type(s) of service(s) you are looking for:</p>
@@ -141,7 +141,7 @@
 	var app_key = "keyv7ZopWtGY1rwVv";
 	var cat_names = [["NYCHA","NYCHA"]];
 	var categories = "";
-	var ages = "";
+	// var ages = "";
 	var work = 0;
 	function load_first() {
 			cat_names.forEach((cat, index) => {
@@ -159,8 +159,12 @@
 		} else if (mode == 1) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/Categories/?sort[0][field]=Name&sort[0][direction]=asc";
 		} else if (mode == 2) {
-			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND("+ages+"OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
-		} else if (mode == 3) {
+			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND(OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
+		} 
+		// else if (mode == 2) {
+		// 	apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND("+ages+"OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
+		// } 
+		else if (mode == 3) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=(RECORD_ID()=\""+id+"\")";
 		}
 		var app = new Vue({
@@ -179,7 +183,7 @@
 					axios.get(
 													 apicall,
                           {
-                              headers: { Authorization: "Bearer "+ app_key }
+                              headers: { "Authorization: Bearer "+ app_key }
                           }
                       ).then(function(response){
                           self.items = response.data.records;
@@ -220,25 +224,36 @@
 		}
 	}
 	function list_page() {
-		if ($('#town').find(":selected").val() != 0 && !isNaN(Number($('#age').val())) ) {
+		// if ($('#town').find(":selected").val() != 0 && !isNaN(Number($('#age').val())) ) 
+		if ($('#town').find(":selected").val() != 0  ){
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
+				// cat_names.forEach((cat, index) => {
+				// 	if ($('#checkbox-v-'+cat[0]).is(":checked")){
+				// 		$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
+				// 		$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Ages: {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }}; Gender(s): {{ item['fields']['Gender'] }}</p></a></li>")
+				// 		if (categories != "") {
+				// 			categories = categories+",";
+				// 		}
+				// 		categories = categories+"FIND(\""+cat[1]+"\",{Category})";
+				// 	}
+				// });
 				cat_names.forEach((cat, index) => {
 					if ($('#checkbox-v-'+cat[0]).is(":checked")){
 						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
-						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Ages: {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }}; Gender(s): {{ item['fields']['Gender'] }}</p></a></li>")
+						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}</a></li>")
 						if (categories != "") {
 							categories = categories+",";
 						}
 						categories = categories+"FIND(\""+cat[1]+"\",{Category})";
 					}
 				});
-				if ($('#age').val()=="") {
-					ages = "";
-				} else {
-					ages = Number($('#age').val())+"<={Maximum Age},"+Number($('#age').val())+">={Minimum Age},";
-				}
+				// if ($('#age').val()=="") {
+				// 	ages = "";
+				// } else {
+				// 	ages = Number($('#age').val())+"<={Maximum Age},"+Number($('#age').val())+">={Minimum Age},";
+				// }
 				$('#town_name').html($('#town').find(":selected").text());
 		    load_api_data('#results',2);
 				geo_data = $('#town').find(":selected").val().split(',').map(Number);
@@ -256,7 +271,7 @@
       	$("#detail").html("");
       	$("#detail").html($("#detail").html() + "<h3>{{ item['fields']['Name'] }}</h3>")
       	$("#detail").html($("#detail").html() + "<h4>{{ item['fields']['Category'] }}</h4>");
-      	$("#detail").html($("#detail").html() + "<p><b>Ages:</b> {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }} &nbsp;&nbsp; <b>Gender(s):</b> {{ item['fields']['Gender'] }}</p>");
+      	// $("#detail").html($("#detail").html() + "<p><b>Ages:</b> {{ item['fields']['Minimum Age'] }}-{{ item['fields']['Maximum Age'] }} &nbsp;&nbsp; <b>Gender(s):</b> {{ item['fields']['Gender'] }}</p>");
 		$("#detail").html($("#detail").html() + "<p><b>Phone:</b> <a v-bind:href=\"'tel:'+item['fields']['Phone']\" target=\"_blank\">{{ item['fields']['Phone'] }}</p>");
 		$("#detail").html($("#detail").html() + "<p><b>Email:</b> <a v-bind:href=\"'mailto:'+item['fields']['Email']\" target=\"_blank\">{{ item['fields']['Email'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Website:</b> <a v-bind:href=\"item['fields']['Website']\" target=\"_blank\">{{ item['fields']['Website'] }}</a></p>");
