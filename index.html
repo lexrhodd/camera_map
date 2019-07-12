@@ -251,7 +251,6 @@
 		$("#detail").html($("#detail").html() + "<p><b>Email:</b> <a v-bind:href=\"'mailto:'+item['fields']['Email']\" target=\"_blank\">{{ item['fields']['Email'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Website:</b> <a v-bind:href=\"item['fields']['Website']\" target=\"_blank\">{{ item['fields']['Website'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Address:</b> <a v-bind:href=\"'https://www.google.com/maps/place/'+item['fields']['Address']  +'+'+item['fields']['County'] \" target=\"_blank\">{{ item['fields']['Address'] }}</a> <b>Building no.</b> {{ item['fields']['building']}} <b>Stairhall: </b> {{ item['fields']['Stairhall']}}</p>");
-
 		$("#detail").html($("#detail").html() + "<p><b>Description:</b> {{ item['fields']['Description'] }}</p>");
 				$("#detail").html($("#detail").html() + "<p><b>Valid As Of:</b> {{ item['fields']['createdTime'] }}</p>");
 			load_api_data('#details',3,id);
