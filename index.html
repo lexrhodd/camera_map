@@ -84,7 +84,7 @@
 
 <div data-role="page" id="results">
 	<div data-role="header" data-position="fixed">
-		<h1> <i id= ></i>  Result: <i> found. click the arrow below for building details. </i></h1>
+		<h1>  Result: <i> found. click the arrow below for building details. </i></h1>
 		<a href="#filter" data-transition="slide" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></a>
 		<div data-role="navbar">
 			<ul>
@@ -93,24 +93,22 @@
 			</ul>
 		</div>
 	</div>
-		<div id="">
+	<div id="">
 			
-		</div>
+	</div>
 		<div data-role="content" class="content">
 				<h1 id="town_name"></h1>
 				<ul id="org_list" data-role="listview" data-inset="true">
 				</ul>
 		</div>
-
 		<ul id="org_geo_list" style="display:none;"></ul>
-
 </div>
 
 
 
 <div data-role="page" id="map-page">
 	<div data-role="header" data-position="fixed">
-		<h1>Results</h1>
+		<h1>Results mapped</h1>
 		<a href="#filter" data-transition="slide" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></a>
 		<div data-role="navbar">
 			<ul>
@@ -135,7 +133,7 @@
 	var app_key = "keyv7ZopWtGY1rwVv";
 	var cat_names = [["NYCHA","NYCHA"],["Commercial","Commercial"]];
 	var categories = "";
-	var ages = "";
+	// var ages = "";
 	var work = 0;
 	function load_first() {
 			cat_names.forEach((cat, index) => {
@@ -153,7 +151,7 @@
 		} else if (mode == 1) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/Categories/?sort[0][field]=Name&sort[0][direction]=asc";
 		} else if (mode == 2) {
-			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND("+ages+"OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
+			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=AND(OR("+categories+"))&sort[0][field]=Name&sort[0][direction]=asc";
 		} else if (mode == 3) {
 			apicall = "https://api.airtable.com/v0/"+app_id+"/" + $('#town').find(":selected").text() + "/?filterByFormula=(RECORD_ID()=\""+id+"\")";
 		}
@@ -220,7 +218,7 @@
 				cat_names.forEach((cat, index) => {
 					if ($('#checkbox-v-'+cat[0]).is(":checked")){
 						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
-						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+"item['fields']['County']"+"</li>")
+						// $("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+"item['fields']['County']"+"</li>")
 						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Managed by: {{ item['fields']['manager'] }}; Number of Cameras: {{ item['fields']['no_cameras']  }}</p></a></li>")
 						
 						if (categories != "") {
@@ -292,7 +290,7 @@
 
 				});
 
-				var markerCluster = new MarkerCluster(map, markers, {imagepath: 'https://fontawesome.com/icons/video?style=solid'});
+				// var markerCluster = new MarkerCluster(map, markers, {imagepath: 'https://fontawesome.com/icons/video?style=solid'});
 
 				var infowindow = new google.maps.InfoWindow({
 					content: "<div id= \'mapstyle\'><h2>"+pin_data[1]+"</h2><div id=\'mapbox\'><a href=\"javascript:details_page(\'"+pin_data[0]+"\')\">view details</a></span></div>"

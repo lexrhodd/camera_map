@@ -1,34 +1,50 @@
-#filter {
-    padding-top: 4%;
-    min-height: 30%;
-    text-align: center;
-}
-
-
-#content .ui-content{
-    display: inline-block;
-    text-align:left;
-    max-width:600px;
-    margin:0 auto 0 auto;
-    padding:0 15px 25px 15px;
-    
-}
-
-.ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit {
-    background-color: #A61B0F ;
-    border-color: #ddd;
-    color:#f2f2f2;
-    text-shadow: 0 0px 0 #D9A577;
-    font-weight: 10000;
-}
-
 body, input, select, textarea, button, .ui-btn {
     font-size: 1em;
     /* text-align: -webkit-center; */
     line-height: 2.3;
     font-family: sans-serif;
+    background-color: #f2f2f2;
+    place-items: center;
+    display: grid;
+    max-width: 100%;
 }
 
+
+
+ .ui-page-theme-a .ui-bar-inherit,  .ui-bar-a .ui-bar-inherit{
+    background-color: #A61B0F ;
+    border-color: #ddd;
+    color:#f2f2f2;
+    text-shadow: 0 0px 0 #D9A577;
+    font-weight: 10000;
+    display: inherit;
+}
+
+#filter,#about,#details, #results,#map-page{
+    padding-top: 4%;
+    min-height: 30%;
+    text-align: center;
+    margin:0 auto 0 auto;
+    padding:0 15px 25px 15px;
+    max-width:600px;
+    /* display: inherit; */
+    /* position: inherit; */
+
+} 
+
+
+#content .ui-content{
+    
+    text-align:center;
+    margin:0 auto 0 auto;
+    padding:0 15px 25px 15px;
+    
+}
+
+
+
+
+/* 
 .ui-header .ui-title, .ui-footer .ui-title {
     color:#f2f2f2;
     background-color: #A61B0F;
@@ -42,7 +58,7 @@ body, input, select, textarea, button, .ui-btn {
     overflow: hidden;
     white-space: nowrap;
     outline: 0!important;
-}
+} */
 
 
 
@@ -63,7 +79,7 @@ body, input, select, textarea, button, .ui-btn {
     height: 100%;
     width: 100%;
 }
-
+/* 
 #mapstyle {
     width:225px;text-align:center;
 
@@ -71,4 +87,4 @@ body, input, select, textarea, button, .ui-btn {
 
 #mapbox {
     width:100%;text-align:center;padding-bottom:10px;
-}
+} */
