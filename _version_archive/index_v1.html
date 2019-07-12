@@ -120,7 +120,7 @@
 		</div>
 	</div>
 		<div>
-			<div id="map"></div>
+			<div id="map" style="width:100%;height:100px;"></div>
 		</div>
 </div>
 
@@ -189,9 +189,10 @@
 	function results_page() {
 		if ($('#town').find(":selected").val() == 0) {
 			alert('You must choose a location.');
-		} else if ($('#checkbox-v-NYCHA').is(":checked") || $('#checkbox-v-Commercial').is(":checked")) {
+		} 
+	 else if ($('#checkbox-v-NYCHA').is(":checked") || $('#checkbox-v-Commercial').is(":checked")) {
 			next_page_1()
-   		} else {
+    } else {
 			alert('You must choose at least one type of service.')
 		}
 	}
@@ -220,9 +221,7 @@
 				cat_names.forEach((cat, index) => {
 					if ($('#checkbox-v-'+cat[0]).is(":checked")){
 						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+cat[1]+"</li>")
-						$("#org_list").html( $("#org_list").html() + "<li data-role=\"list-divider\">"+"item['fields']['County']"+"</li>")
 						$("#org_list").html( $("#org_list").html() + "<li v-for=\"item in items\" v-if=\"item['fields']['Category'] == '"+cat[1]+"'\"><a href=\"javascript:void('')\" v-bind:id=\"item['id']\" onClick=\"details_page(this.id);\">{{ item['fields']['Name'] }}<p>Managed by: {{ item['fields']['manager'] }}; Number of Cameras: {{ item['fields']['no_cameras']  }}</p></a></li>")
-						
 						if (categories != "") {
 							categories = categories+",";
 						}
@@ -233,6 +232,7 @@
 				$('#town_name').html($('#town').find(":selected").text());
 		    load_api_data('#results',2);
 				geo_data = $('#town').find(":selected").val().split(',').map(Number);
+				//console.log(geo_data)
 				lat = geo_data[0];
 				lon = geo_data[1];
 				zoomin = geo_data[2];
@@ -250,6 +250,7 @@
 		$("#detail").html($("#detail").html() + "<p><b>Camera Type:</b> {{ item['fields']['Camera type']}} &nbsp;&nbsp; <b>Number of Cameras:</b> {{ item['fields']['no_cameras']}} </p>");
 		$("#detail").html($("#detail").html() + "<p><b>Email:</b> <a v-bind:href=\"'mailto:'+item['fields']['Email']\" target=\"_blank\">{{ item['fields']['Email'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Website:</b> <a v-bind:href=\"item['fields']['Website']\" target=\"_blank\">{{ item['fields']['Website'] }}</a></p>");
+      	// $("#detail").html($("#detail").html() + "<p><b>Address:</b> <a v-bind:href=\"'https://www.google.com/maps/place/'+item['fields']['Address']  +'/'+item['fields']['Latitude'] +',' +item['fields']['Longitude']  \" target=\"_blank\">{{ item['fields']['Address'] }}</a> <b>Building no.</b> {{ item['fields']['building']}} <b>Stairhall: </b> {{ item['fields']['Stairhall']}}</p>");
       	$("#detail").html($("#detail").html() + "<p><b>Address:</b> <a v-bind:href=\"'https://www.google.com/maps/place/'+item['fields']['Address']  +'+'+item['fields']['County'] \" target=\"_blank\">{{ item['fields']['Address'] }}</a> <b>Building no.</b> {{ item['fields']['building']}} <b>Stairhall: </b> {{ item['fields']['Stairhall']}}</p>");
 
 		$("#detail").html($("#detail").html() + "<p><b>Description:</b> {{ item['fields']['Description'] }}</p>");
@@ -272,15 +273,15 @@
 			}
 		}
 		//list_page();
-
-		// map items- currently broken!!    https://developers.google.com/maps/documentation/javascript/adding-a-google-map
-		// map items- new feature- geolocation!!    https://developers.google.com/maps/documentation/javascript/geolocation
+		/*
+		https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+			*/
 		var markers = [];
 		function initMap(lat,lon,zoomin) {
-			var infobx = {lat: lat, lng: lon};
+			var uluru = {lat: lat, lng: lon};
 			var map = new google.maps.Map(document.getElementById('map'), {
-		        zoom: 12,
-		        center: infobx
+		        zoom: zoomin,
+		        center: uluru
 		      });
 			i = 0;
 			$('#org_geo_list li').each(function(){
@@ -288,21 +289,16 @@
 				pin_data = $(this).text().split(',');
 				marker = new google.maps.Marker({
 					position: {lat: Number(pin_data[2]), lng: Number(pin_data[3])},
-					map: map,
-					title:  '<p><b>Description:</b> {{ item[\'fields\'][\'Name\'] }}</p>'
-
+					map: map
 				});
-
-				var markerCluster = new MarkerCluster(map, markers, {imagepath: 'https://fontawesome.com/icons/video?style=solid'});
-
 				var infowindow = new google.maps.InfoWindow({
-					content: "<div id= \'mapstyle\'><h2>"+pin_data[1]+"</h2><div id=\'mapbox\'><a href=\"javascript:details_page(\'"+pin_data[0]+"\')\">view details</a></span></div>"
+					content: "<div style=\"width:225px;text-align:center;\"><h2>"+pin_data[1]+"</h2><div style=\"width:100%;text-align:center;padding-bottom:10px;\"><a href=\"javascript:details_page(\'"+pin_data[0]+"\')\">view details</a></span></div>"
 				});
 				//creates an infowindow 'key' in the marker.
 				marker.infowindow = infowindow;
 				//finally call the explicit infowindow object
 				marker.addListener('click', function() {
-					// hideAllInfoWindows(map);
+					hideAllInfoWindows(map);
 					return this.infowindow.open(map, this);
 				});
 				markers.push(marker);
