@@ -1,14 +1,17 @@
-.content {
-    text-align: center
+#filter {
+    padding-top: 4%;
+    min-height: 30%;
+    text-align: center;
 }
 
 
-.ui-content{
+#content .ui-content{
+    display: inline-block;
     text-align:left;
     max-width:600px;
     margin:0 auto 0 auto;
     padding:0 15px 25px 15px;
-    display: inline-block;
+    
 }
 
 .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit {
