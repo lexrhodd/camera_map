@@ -10,44 +10,37 @@
 	<link rel="apple-touch-icon" href="images/icon_300.png"/>
 
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" href="/_css/style.css" />
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script>
     	$(document).on("mobileinit", function () {
-        	$.mobile.hashListeningEnabled = false;
-        	$.mobile.pushStateEnabled = false;
+        	$.mobile.hashListeningEnabled = true;
+        	$.mobile.pushStateEnabled = true;
     	});
 	</script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-	<style>
-		.content {
-			text-align:left;
-			max-width:700px;
-			margin:0 auto 0 auto;
-			padding:0 15px 25px 15px
-		}
-	</style>
+
+
 </head>
 <body>
 
 <div data-role="page" id="filter">
-	<div data-role="header" data-position="fixed">
-		<h1>Camera Map</h1>
-		<a href="#about" class="ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all ui-btn-right" data-transition="slide"></a>
+	<div data-role="header" data-position="fixed" >
+		<h1>Camera Finder</h1>
+		<a href="#about" class="ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all ui-btn-right"  data-transition="slide"></a>
 	</div>
 	<div data-role="content" class="content">
-		<div class="ui-field-contain"> DESCRIPTION
-			<select id="town" name="select-native-1" id="select-native-1" style="width:100%" onChange="list_page();">
+		<div class="ui-field-contain"> 
+			<select id="town" name="select-native-1" class="select-css" id="select-native-1"  onChange="list_page();">
         		<option value="0">Choose a Borough</option>
 						<option id="loading_selection" value="0">Loading Boroughs...</option>
 						<option v-for="item in items" v-bind:value="item['fields']['Latitude, Longitude, Zoom']">{{ item['fields']['Name'] }}</option>
     		</select>
 		</div>
 
-		<p> AGE </p>
-		<input name="age" id="age" data-type="number" placeholder="Input Age" onChange="list_page();">
 
 		<fieldset id="categories" data-role="controlgroup">
-			<p style="margin-top:15px;">Check the type(s) of service(s) you are looking for:</p>
+			<p style="margin-top:15px;">Check the type(s) of camera you are looking for:</p>
 		</fieldset>
 
 		<fieldset data-role="controlgroup" data-type="horizontal">
@@ -57,7 +50,7 @@
     		<label for="radio-choice-h-2b">Map View</label>
 		</fieldset>
 
-		<a href="javascript:results_page();" data-role="button">Find Cameras</a>
+		<a href="javascript:results_page();" data-role="button" style="background-color: #F28C0F; color: #6b533e; text-shadow: 0 0px 0 #F28C0F;">Find Cameras</a>
 
 	</div>
 </div>
@@ -91,17 +84,17 @@
 
 <div data-role="page" id="results">
 	<div data-role="header" data-position="fixed">
-		<h1>Results</h1>
+		<h1>Result: <i>xxx found. click the arrow below for building details. </i></h1>
 		<a href="#filter" data-transition="slide" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#results">List</a></li>
-				<li><a href="javascript:void('');" style="color:#ccc" onClick="size_map();$.mobile.changePage($('#map-page'), { transition: 'none'});">Map</a></li>
+				<li><a href="javascript:void('');" onClick="size_map();$.mobile.changePage($('#map-page'), { transition: 'none'});">Map</a></li>
 			</ul>
 		</div>
 	</div>
-		<div data-role="content" class="content">
-			xxx found, click the arrow below for building details. 
+		<div id="">
+			
 		</div>
 		<div data-role="content" class="content">
 				<h1 id="town_name"></h1>
@@ -115,13 +108,13 @@
 
 
 
-<div data-role="page" id="map-page" style="background:#798e9e;">
+<div data-role="page" id="map-page">
 	<div data-role="header" data-position="fixed">
 		<h1>Results</h1>
 		<a href="#filter" data-transition="slide" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></a>
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#results" data-transition="none" style="color:#ccc">List</a></li>
+				<li><a href="#results" data-transition="none" >List</a></li>
 				<li><a href="#map-page">Map</a></li>
 			</ul>
 		</div>
@@ -131,8 +124,7 @@
 		</div>
 </div>
 
-<!-- Include Dependency Scripts -->
-<!--<script type="text/javascript" src="https://unpkg.com/vue"></script>-->
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 
@@ -197,9 +189,8 @@
 	function results_page() {
 		if ($('#town').find(":selected").val() == 0) {
 			alert('You must choose a location.');
-		} else if ( isNaN(Number($('#age').val())) ) {
-			alert('You must enter a numeric age (in years) or leave blank.')
-		} else if ($('#checkbox-v-NYCHA').is(":checked") || $('#checkbox-v-Commercial').is(":checked")) {
+		} 
+	 else if ($('#checkbox-v-NYCHA').is(":checked") || $('#checkbox-v-Commercial').is(":checked")) {
 			next_page_1()
     } else {
 			alert('You must choose at least one type of service.')
@@ -223,7 +214,7 @@
 		}
 	}
 	function list_page() {
-		if ($('#town').find(":selected").val() != 0 && !isNaN(Number($('#age').val())) ) {
+		if ($('#town').find(":selected").val() != 0 ) {
 				$("#org_list").html("");
 				$("#org_geo_list").html("<li id=\"ge0_points\" v-for=\"item in items\">{{ item['id'] }},{{ item['fields']['Name'] }},{{ item['fields']['Latitude'] }},{{ item['fields']['Longitude'] }}</li>");
 				categories = "";
@@ -237,11 +228,7 @@
 						categories = categories+"FIND(\""+cat[1]+"\",{Category})";
 					}
 				});
-				if ($('#age').val()=="") {
-					ages = "";
-				} else {
-					ages = Number($('#age').val())+"<={Maximum Age},"+Number($('#age').val())+">={Minimum Age},";
-				}
+
 				$('#town_name').html($('#town').find(":selected").text());
 		    load_api_data('#results',2);
 				geo_data = $('#town').find(":selected").val().split(',').map(Number);
@@ -255,7 +242,6 @@
 		}
 		function details_page(id) {
       	$("#detail").attr("v-for", "item in items");
-      	//$("#detail").attr("v-if", "item['id'] == '"+id+"'");
       	$("#detail").html("");
       	$("#detail").html($("#detail").html() + "<h3>{{ item['fields']['Name'] }}</h3>")
       	$("#detail").html($("#detail").html() + "<h4>{{ item['fields']['Category'] }}</h4>");
@@ -268,12 +254,9 @@
       	$("#detail").html($("#detail").html() + "<p><b>Description:</b> {{ item['fields']['Description'] }}</p>");
 				$("#detail").html($("#detail").html() + "<p><b>Valid As Of:</b> {{ item['fields']['createdTime'] }}</p>");
 			load_api_data('#details',3,id);
-			//$.mobile.changePage($('#details'), { transition: 'slide'})
+
 			next_page_2();
-      //$('#details').listview('refresh');
-		  //$( '#details' ).enhanceWithin();
-      //$.mobile.changePage($('#details'), { transition: 'slide'});
-      //return true;
+
     }
 		function next_page_2() {
 			if (work == 0) {
