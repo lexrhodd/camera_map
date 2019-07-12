@@ -84,7 +84,7 @@
 
 <div data-role="page" id="results">
 	<div data-role="header" data-position="fixed">
-		<h1>Result: <i>xxx found. click the arrow below for building details. </i></h1>
+		<h1>Result: <i> XXX found. click the arrow below for building details. </i></h1>
 		<a href="#filter" data-transition="slide" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></a>
 		<div data-role="navbar">
 			<ul>
@@ -250,7 +250,7 @@
 		$("#detail").html($("#detail").html() + "<p><b>Camera Type:</b> {{ item['fields']['Camera type']}} &nbsp;&nbsp; <b>Number of Cameras:</b> {{ item['fields']['no_cameras']}} </p>");
 		$("#detail").html($("#detail").html() + "<p><b>Email:</b> <a v-bind:href=\"'mailto:'+item['fields']['Email']\" target=\"_blank\">{{ item['fields']['Email'] }}</a></p>");
       	$("#detail").html($("#detail").html() + "<p><b>Website:</b> <a v-bind:href=\"item['fields']['Website']\" target=\"_blank\">{{ item['fields']['Website'] }}</a></p>");
-      	$("#detail").html($("#detail").html() + "<p><b>Address:</b> <a v-bind:href=\"'https://www.google.com/maps/place/'+item['fields']['Address']\" target=\"_blank\">{{ item['fields']['Address'] }}</a> <b>Building no.</b> {{ item['fields']['building']}} <b>Stairhall: </b> {{ item['fields']['Stairhall']}}</p>");
+      	$("#detail").html($("#detail").html() + "<p><b>Address:</b> <a v-bind:href=\"'https://www.google.com/maps/place/'+item['fields']['Address'] \" target=\"_blank\">{{ item['fields']['Address'] }}</a> <b>Building no.</b> {{ item['fields']['building']}} <b>Stairhall: </b> {{ item['fields']['Stairhall']}}</p>");
       	$("#detail").html($("#detail").html() + "<p><b>Description:</b> {{ item['fields']['Description'] }}</p>");
 				$("#detail").html($("#detail").html() + "<p><b>Valid As Of:</b> {{ item['fields']['createdTime'] }}</p>");
 			load_api_data('#details',3,id);
