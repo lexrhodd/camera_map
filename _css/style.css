@@ -1,8 +1,14 @@
 .content {
+    text-align: center
+}
+
+
+.content .ui-content{
     text-align:left;
-    max-width:700px;
+    max-width:600px;
     margin:0 auto 0 auto;
-    padding:0 15px 25px 15px
+    padding:0 15px 25px 15px;
+    display: inline-block;
 }
 
 .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit {
