@@ -78,6 +78,8 @@ body, input, select, textarea, button, .ui-btn {
 #map {
     height: 100%;
     width: 100%;
+    position: inherit; 
+    overflow: hidden;
 }
 /* 
 #mapstyle {
